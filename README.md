@@ -82,7 +82,7 @@ XMLCompat.initialize(getWebImpl());
 
 const parsed = VCard.fromXML('<xml...>');
 
-if (!parsed || !parsed.simple)
+if (!parsed)
   throw 'Something is wrong with this vcard';
 
 console.log(vcard.fullName);
