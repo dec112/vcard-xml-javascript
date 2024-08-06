@@ -108,7 +108,7 @@ export class VCard {
    * 
    * @returns VCard for chaining function calls
    */
-  addBirthday = (value: Date) => this.add(KeyId.BIRTHDAY, value);
+  addBirthday = (value: Date | string) => this.add(KeyId.BIRTHDAY, value);
   /**
    * The VCard's `gender/sex` object
    * 
@@ -458,7 +458,8 @@ const vcardNodes: XMLNode[] = [
   {
     nodeName: KeyId.BIRTHDAY,
     parser: (value) => value ? new Date(value) : value,
-    writer: (value: Date) => value.toISOString(),
+    // also allow value to be plain string
+    writer: (value: Date) => typeof value === 'string' ? value : value.toISOString(),
   },
   {
     nodeName: KeyId.NOTE,

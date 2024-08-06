@@ -104,25 +104,33 @@ describe('VCard functionality', () => {
 
     expect(vcardXmlString).toMatch(/<asdf:test-item>.*<asdf:text>Lorem Ipsum<\/asdf:text>.+<\/asdf:test-item>/s);
   });
-
+  
   it('throws an error for invalid data', () => {
     expect(() => new VCard().toXMLString()).toThrowError();
   });
-
+  
   it('does not write unnecessary stuff', () => {
     const vcard = new VCard();
-
+    
     vcard.addFullName('Alice Smith');
     vcard.addStreet('Example Street 3');
-
+    
     expect(vcard.toXMLString()).toBe(getValidVCardSmallString());
   });
-
+  
   it('should escape special XML characters', () => {
     const vcard = new VCard();
-
+    
     vcard.add(KeyId.FULL_NAME, '</text>Alice Smith');
-
+    
     expect(vcard.toXMLString()).toBe(getValidVCardSpecialChars());
   });
+  
+  it('should not throw if date values are strings instead of date objects', () => {
+    const vcard = new VCard();
+    
+    vcard.addBirthday('2020-01-01');
+    
+    expect(vcard.toXMLString()).toMatch(/<bday>2020-01-01<\/bday>/s);
+  })
 });
