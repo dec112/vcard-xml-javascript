@@ -33,10 +33,10 @@ import {
 } from 'vcard-xml';
 
 // if xmldom interface is available (e.g. on web browsers)
-XMLCompat.initialize(getNodeImpl());
+XMLCompat.initialize(getWebImpl());
 // if xmldom interface is NOT available (e.g. on node environments)
 // also don't forget to install required peer dependency @xmldom/xmldom
-XMLCompat.initialize(getWebImpl());
+XMLCompat.initialize(getNodeImpl());
 
 const vcard = new VCard()
   .addFullName('Alice Smith')
@@ -75,10 +75,10 @@ import {
 } from 'vcard-xml';
 
 // if xmldom interface is available (e.g. on web browsers)
-XMLCompat.initialize(getNodeImpl());
+XMLCompat.initialize(getWebImpl());
 // if xmldom interface is NOT available (e.g. on node environments)
 // also don't forget to install required peer dependency @xmldom/xmldom
-XMLCompat.initialize(getWebImpl());
+XMLCompat.initialize(getNodeImpl());
 
 const parsed = VCard.fromXML('<xml...>');
 
